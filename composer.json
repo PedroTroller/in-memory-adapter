@@ -20,10 +20,14 @@
         "gaufrette/core": "dev-master"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*"
+        "phpspec/phpspec": "~2.0",
+        "gaufrette/test-suite": "dev-master"
     },
     "autoload": {
-        "psr-0": { "Gaufrette": "src/" }
+        "psr-0": { "Gaufrette\\Adapter": "src/" }
+    },
+    "autoload-dev": {
+        "psr-0": { "Gaufrette\\Test": "test/" }
     },
     "config": {
         "bin-dir": "bin"
