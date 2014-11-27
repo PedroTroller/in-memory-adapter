@@ -17,6 +17,7 @@
         }
     ],
     "require": {
+        "php": ">=5.3.3",
         "gaufrette/core": "dev-master"
     },
     "require-dev": {
