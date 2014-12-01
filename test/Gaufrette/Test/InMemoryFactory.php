@@ -11,4 +11,9 @@ class InMemoryFactory implements AdapterFactory
     {
         return new InMemory;
     }
+
+    public function destroy()
+    {
+
+    }
 }
