@@ -6,11 +6,13 @@ use Gaufrette\Core\Adapter;
 use Gaufrette\Core\Adapter\CanListKeys;
 use Gaufrette\Core\Adapter\KnowsChecksum;
 use Gaufrette\Core\Adapter\KnowsContent;
+use Gaufrette\Core\Adapter\KnowsLastAccess;
+use Gaufrette\Core\Adapter\KnowsLastModification;
 use Gaufrette\Core\Adapter\KnowsMetadata;
 use Gaufrette\Core\Adapter\KnowsMimeType;
 use Gaufrette\Core\Adapter\KnowsSize;
 
-class InMemory implements Adapter, CanListKeys, KnowsContent, KnowsChecksum, KnowsMimeType, KnowsSize, KnowsMetadata
+class InMemory implements Adapter, CanListKeys, KnowsContent, KnowsChecksum, KnowsMimeType, KnowsSize, KnowsMetadata, KnowsLastAccess, KnowsLastModification
 {
     /**
      * @var array[] $files
@@ -124,6 +126,42 @@ class InMemory implements Adapter, CanListKeys, KnowsContent, KnowsChecksum, Kno
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function readLastAccess($key)
+    {
+        return $this->files[$key]['last access'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function writeLastAccess($key, $time)
+    {
+        $this->files[$key]['last access'] = $time;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function readLastModification($key)
+    {
+        return $this->files[$key]['last modification'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function writeLastModification($key, $time)
+    {
+        $this->files[$key]['last modification'] = $time;
+
+        return $this;
+    }
+
+    /**
      * @param array $files
      *
      * @return InMemory
@@ -146,8 +184,10 @@ class InMemory implements Adapter, CanListKeys, KnowsContent, KnowsChecksum, Kno
     public function setFile($key, array $data)
     {
         $legacy = array(
-            'content' => null,
-            'metadata' => array(),
+            'content'           => null,
+            'metadata'          => array(),
+            'last access'       => 0,
+            'last modification' => 0,
         );
 
         if (array_key_exists($key, $this->files)) {

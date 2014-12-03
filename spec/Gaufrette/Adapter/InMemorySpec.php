@@ -26,6 +26,20 @@ class InMemorySpec extends ObjectBehavior
         $this->readMetadata('test')->shouldReturn(array('m1' => 'the_metadata'));
     }
 
+    function it_set_file_access_time()
+    {
+        $this->setFile('test', array('last access' => 1000));
+
+        $this->readLastAccess('test')->shouldReturn(1000);
+    }
+
+    function it_set_file_modification_time()
+    {
+        $this->setFile('test', array('last modification' => 1000));
+
+        $this->readLastModification('test')->shouldReturn(1000);
+    }
+
     function it_deduce_mime_type()
     {
         $image = file_get_contents(sprintf('%s/../../../fixtures/image.gif', __DIR__));
