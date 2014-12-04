@@ -27,6 +27,7 @@ class InMemory implements Adapter, CanListKeys, KnowsContent, KnowsChecksum, Kno
     public function __construct(array $files = array())
     {
         $this->files = array();
+        $this->setFiles($files);
     }
 
     /**
