@@ -15,14 +15,12 @@ use Gaufrette\Core\Adapter\KnowsSize;
 class InMemory implements Adapter, CanListKeys, KnowsContent, KnowsChecksum, KnowsMimeType, KnowsSize, KnowsMetadata, KnowsLastAccess, KnowsLastModification
 {
     /**
-     * @var array[] $files
+     * @var array[]
      */
     private $files;
 
     /**
      * @param string[] $files
-     *
-     * @return void
      */
     public function __construct(array $files = array())
     {
@@ -178,7 +176,7 @@ class InMemory implements Adapter, CanListKeys, KnowsContent, KnowsChecksum, Kno
 
     /**
      * @param string $key
-     * @param array $data
+     * @param array  $data
      *
      * @return InMemory
      */
@@ -192,7 +190,6 @@ class InMemory implements Adapter, CanListKeys, KnowsContent, KnowsChecksum, Kno
         );
 
         if (array_key_exists($key, $this->files)) {
-
             $legacy = $this->files[$key];
         }
 
